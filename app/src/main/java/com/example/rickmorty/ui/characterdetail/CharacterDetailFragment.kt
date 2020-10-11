@@ -21,10 +21,10 @@ class CharacterDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCharacterDetailBinding.inflate(inflater)
-
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         viewModel.sayHi()
 
-        args.characterId
 
         return binding.root
     }
