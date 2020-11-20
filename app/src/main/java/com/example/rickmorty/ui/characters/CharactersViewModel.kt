@@ -30,7 +30,7 @@ class CharactersViewModel(private val repository: RickMortyRepository) : ViewMod
     val charactersErrorMessage: LiveData<String>
         get() = _charactersErrorMessage
 
-    // para probar los eventos
+    // Used for test Events
     private val _charactersResultMessage = MutableLiveData<Event<String>>()
     val charactersResultMessage: LiveData<Event<String>>
         get() = _charactersResultMessage
@@ -58,25 +58,8 @@ class CharactersViewModel(private val repository: RickMortyRepository) : ViewMod
                 _loadingStatus.value = LoadingStatus.ERROR
             }
 
-            val message: String = sleepThread()
-            Log.i("CharactersViewModel", message)
-
-            sleepThread2()
-
-            // _characters.value = CharactersResponse(null, emptyList())
+            // _characters.value = CharactersResponse(null, emptyList()) // Simple way to test is textView for empty state shows when list is empty
         }
     }
 
-    private suspend fun sleepThread() = withContext(Dispatchers.IO) {
-
-        Thread.sleep(3000)
-
-        return@withContext "Hi there, this is the returned value"
-    }
-
-    private suspend fun sleepThread2() {
-        withContext(Dispatchers.IO) {
-            Thread.sleep(3000)
-        }
-    }
 }
